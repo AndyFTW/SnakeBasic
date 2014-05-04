@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SnakeBasic.Helpers
 {
-  public static class Helper1
+  public static class LevelHelper
   {
     /// <summary>
     /// Creates and loads walls.

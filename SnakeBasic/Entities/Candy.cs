@@ -21,7 +21,7 @@ namespace SnakeBasic.Entities
         {
             while (true)
             {
-                Point suggestion = Helper1.GetRandomPoint();
+                Point suggestion = LevelHelper.GetRandomPoint();
 
                 if (Program.ActiveSnake.Body.Contains(suggestion) || Program.ActiveSnake.Head == suggestion || Program.Walls.Any(x => x.Position == suggestion))
                     continue;

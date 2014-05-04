@@ -80,7 +80,7 @@ namespace SnakeBasic
       Walls = new List<Wall>(); // Initialize
       ActiveSnake = new Snake(new Point(10, 10), 4); // Initialize snake
 
-      Walls = Helper1.LoadWalls(WallFormation.FourCrosses | WallFormation.Rectangle);
+      Walls = LevelHelper.LoadWalls(WallFormation.FourCrosses | WallFormation.Rectangle);
 
       ActiveCandy = new Candy();
 
