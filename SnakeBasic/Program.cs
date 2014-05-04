@@ -159,11 +159,11 @@ namespace SnakeBasic
 
       string answer = Console.ReadLine();
 
-      if (answer.Any())
+      if (answer.Length > 0)
       {
-        char key = answer.ToLower()[0];
+        char key = answer.ToUpper()[0];
 
-        if (key == 'y')
+        if (key == 'Y')
           InitializeGame();
         else
           Environment.Exit(0);

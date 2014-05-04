@@ -64,7 +64,7 @@ Zunächst wird geguckt, um welche Pfeiltaste es sich handelt. Anschließend wird
 Nicht zulässig ist er, sobald der Richtungswechsel eine 180° Drehung darstellen würde ( z.B. links -> rechts ).
 
 ============================================
-==================== FAQ ===================
+==================== Q&A ===================
 
 Q: Wieso abonnierst du nicht einfach das KeyDown Event um Pfeiltasten zu behandeln?
 A: Konsolenanwendungen stellen kein KeyDown Event zur Verfügung.
@@ -90,9 +90,9 @@ A: Als ich diese noch nicht implementiert hatte, beobachtete ich einen Fehler, b
    Blickrichtungsänderung zulässig? Ja (rechts -> unten = 90°)
    Blick-Schlange: unten
 
-   500 ms zuende
+   100 ms zuende
    Aktuelle Blickrichtung: unten
    Schlange kriecht in sich selbst
 
    QueuedDirection zeigt die Richtung, die falls in diesem Moment die 100 ms um sind, auf die Schlange angewandt wird.
-   Die Überprüfung, ob die Änderung nun aber zulässig ist, wird weiterhin mit der Echten Schlangen-Blickrichtung geprüft.
+   Die Überprüfung, ob die Änderung nun aber zulässig ist, wird weiterhin mit der echten Schlangen-Blickrichtung geprüft.
