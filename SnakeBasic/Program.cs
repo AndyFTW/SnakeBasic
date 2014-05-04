@@ -1,12 +1,12 @@
-﻿using System;
+﻿using SnakeBasic.Entities;
+using SnakeBasic.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Timers;
-using SnakeBasic.Entities;
 using Timer = System.Timers.Timer;
-using SnakeBasic.Helpers;
 
 namespace SnakeBasic
 {

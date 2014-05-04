@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using SnakeBasic.Entities;
+using System.Collections.Generic;
 using System.Threading;
-using SnakeBasic.Entities;
 
 namespace SnakeBasic
 {
