@@ -134,7 +134,6 @@ namespace SnakeBasic
 
 
 
-
     /// <summary>
     /// Shows the game over dialog.
     /// </summary>

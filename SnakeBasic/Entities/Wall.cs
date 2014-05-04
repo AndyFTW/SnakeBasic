@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace SnakeBasic.Entities
 {
-    public class Wall : Entity
+  public class Wall : Entity
+  {
+    /// <summary>
+    /// Initializes a new instance of SnakeBasic.Entitys.Wall class.
+    /// </summary>
+    public Wall(Point position)
     {
-        /// <summary>
-        /// Initializes a new instance of SnakeBasic.Entitys.Wall class.
-        /// </summary>
-        public Wall(Point position)
-        {
-            this.RenderingChar = '#';
+      this.RenderingChar = '#';
 
-            this.Position = position;
-        }
+      this.Position = position;
     }
+  }
 }
