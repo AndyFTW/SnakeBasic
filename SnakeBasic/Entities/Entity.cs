@@ -45,10 +45,11 @@ namespace SnakeBasic.Entities
     #endregion
 
     /// <summary>
-    /// Finds the first entity beeing in the close range of the given entity, if found; otherwise: null. Searching clockwise.
+    /// Finds the first entity beeing in the close range of the given entity, if found; otherwise: null.
     /// </summary>
     /// <param name="obj">Specifies the origin entity.</param>
-    public Entity FindNextObject(Entity obj)
+    /// <remarks>The search is performed clockwise.</remarks>
+    public Entity FindNextEntity(Entity obj)
     {
       // obj: O
       // to search points: X
