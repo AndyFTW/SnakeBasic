@@ -18,7 +18,7 @@ namespace SnakeBasic.Helpers
 
       #region Rectangle
 
-      List<Wall> walls = new List<Wall>();;
+      List<Wall> walls = new List<Wall>();
 
       if (formation.HasFlag(WallFormation.Rectangle))
       {
