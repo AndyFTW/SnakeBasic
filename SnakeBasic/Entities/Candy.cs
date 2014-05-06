@@ -31,7 +31,5 @@ namespace SnakeBasic.Entities
         return;
       }
     }
-
-
   }
 }

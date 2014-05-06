@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SnakeBasic.Entities
 {
-  public class Entity
+  public abstract class Entity
   {
     /// <summary>
     /// Gets or sets a value indicating the rendering char of the entity.
