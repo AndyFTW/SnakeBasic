@@ -45,24 +45,24 @@ namespace SnakeBasic.Entities
     /// </summary>
     public char HeadRenderingChar { get; set; }
 
-	  Direction _MoveDirection;
+    Direction _MoveDirection;
     /// <summary>
     /// Gets or sets a value indicating the direction the snake moves.
     /// </summary>
-    public Direction MoveDirection 
-		{
-			get { return _MoveDirection; }
-			set
-			{
-				if (IsValidMovementChange(value))
-					_MoveDirection = value;
-			}
-		}
+    public Direction MoveDirection
+    {
+      get { return _MoveDirection; }
+      set
+      {
+        if (IsValidMovementChange(value))
+          _MoveDirection = value;
+      }
+    }
 
     /// <summary>
     /// Gets or sets a value indicating the next direction the snake moves.
     /// </summary>
-    public Direction QueuedDirection { get; set; }
+    Direction lastDirection;
 
     /// <summary>
     /// Initializes a new instance of SnakeBasic.Entitys.Snake class.
@@ -72,7 +72,7 @@ namespace SnakeBasic.Entities
       this.RenderingChar = '0';
       this.HeadRenderingChar = '@';
 
-      this.MoveDirection = this.QueuedDirection = Direction.Right; // Set default direction
+      _MoveDirection = Direction.Right; // Set default direction
 
       this.Body = new List<Point>(); // Initialize
 
@@ -93,7 +93,7 @@ namespace SnakeBasic.Entities
     /// <param name="ateGoody">Indicates whether a goody was eaten by the snake.</param>
     public Entity UpdatePosition(bool ateGoody = false)
     {
-      this.MoveDirection = this.QueuedDirection; // Assign pending direction
+      lastDirection = this.MoveDirection; // Assign lastDirection for further validations
 
       #region Update Body
 
@@ -172,19 +172,19 @@ namespace SnakeBasic.Entities
     /// <summary>
     /// Returns a value indicating whether the movement directory change is valid.
     /// </summary>
-    /// <param name="dir">Specifies the new direction.</param>
+    /// <param name="dir">Specifies the direction to check.</param>
     private bool IsValidMovementChange(Direction dir)
     {
-      if (this.MoveDirection == Direction.Down && dir == Direction.Up)
+      if (lastDirection == Direction.Down && dir == Direction.Up)
         return false;
 
-      if (this.MoveDirection == Direction.Up && dir == Direction.Down)
+      if (lastDirection == Direction.Up && dir == Direction.Down)
         return false;
 
-      if (this.MoveDirection == Direction.Left && dir == Direction.Right)
+      if (lastDirection == Direction.Left && dir == Direction.Right)
         return false;
 
-      if (this.MoveDirection == Direction.Right && dir == Direction.Left)
+      if (lastDirection == Direction.Right && dir == Direction.Left)
         return false;
 
       return true;
