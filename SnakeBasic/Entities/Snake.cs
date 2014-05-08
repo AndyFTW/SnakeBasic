@@ -45,10 +45,19 @@ namespace SnakeBasic.Entities
     /// </summary>
     public char HeadRenderingChar { get; set; }
 
+	  Direction _MoveDirection;
     /// <summary>
     /// Gets or sets a value indicating the direction the snake moves.
     /// </summary>
-    public Direction MoveDirection { get; set; }
+    public Direction MoveDirection 
+		{
+			get { return _MoveDirection; }
+			set
+			{
+				if (IsValidMovementChange(value))
+					_MoveDirection = value;
+			}
+		}
 
     /// <summary>
     /// Gets or sets a value indicating the next direction the snake moves.
@@ -164,7 +173,7 @@ namespace SnakeBasic.Entities
     /// Returns a value indicating whether the movement directory change is valid.
     /// </summary>
     /// <param name="dir">Specifies the new direction.</param>
-    public bool IsValidMovementChange(Direction dir)
+    private bool IsValidMovementChange(Direction dir)
     {
       if (this.MoveDirection == Direction.Down && dir == Direction.Up)
         return false;
