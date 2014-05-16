@@ -63,7 +63,7 @@ namespace SnakeBasic.Entities
     }
 
     /// <summary>
-    /// Gets or sets a value indicating the next direction the snake moves.
+    /// Indicates the last direction the snake moved.
     /// </summary>
     Direction lastDirection;
 
