@@ -17,7 +17,7 @@ namespace SnakeBasic.Entities
     /// <summary>
     /// Initializes a new instance of SnakeBasic.Entities.Entity class.
     /// </summary>
-    public Entity()
+    protected Entity()
     {
       this.RenderingChar = 'n'; // n = nil
     }
