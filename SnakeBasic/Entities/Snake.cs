@@ -43,7 +43,10 @@ namespace SnakeBasic.Entities
     /// <summary>
     /// Gets or sets a value indicating the rendering char of the head of the snake.
     /// </summary>
-    public char HeadRenderingChar { get; set; }
+    public char HeadRenderingChar
+    {
+      get { return '@'; }
+    }
 
     Direction _MoveDirection;
     /// <summary>
@@ -69,9 +72,6 @@ namespace SnakeBasic.Entities
     /// </summary>
     public Snake(Point startingPoint, int length)
     {
-      this.RenderingChar = '0';
-      this.HeadRenderingChar = '@';
-
       _MoveDirection = Direction.Right; // Set default direction
 
       this.Body = new List<Point>(); // Initialize
@@ -188,6 +188,14 @@ namespace SnakeBasic.Entities
         return false;
 
       return true;
+    }
+
+    /// <summary>
+    /// Gets a value indicating the rendering char of the entity.
+    /// </summary>
+    public override char RenderingChar
+    {
+      get { return '0'; }
     }
   }
 }

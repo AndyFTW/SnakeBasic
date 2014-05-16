@@ -5,22 +5,14 @@ namespace SnakeBasic.Entities
   public abstract class Entity
   {
     /// <summary>
-    /// Gets or sets a value indicating the rendering char of the entity.
+    /// Gets a value indicating the rendering char of the entity.
     /// </summary>
-    public char RenderingChar { get; set; }
+    public abstract char RenderingChar { get; }
 
     /// <summary>
     /// Gets or sets the position of the entity.
     /// </summary>
     public Point Position { get; set; }
-
-    /// <summary>
-    /// Initializes a new instance of SnakeBasic.Entities.Entity class.
-    /// </summary>
-    protected Entity()
-    {
-      this.RenderingChar = 'n'; // n = nil
-    }
 
     #region Position
 
@@ -28,7 +20,7 @@ namespace SnakeBasic.Entities
     /// Changes the Y-Position of the entity.
     /// </summary>
     /// <param name="x">Determinates the size of the shifting.</param>
-    public void SetPosX(int x)
+    public void MovePosX(int x)
     {
       this.Position = new Point(this.Position.X + x, this.Position.Y);
     }
@@ -37,7 +29,7 @@ namespace SnakeBasic.Entities
     /// Changes the Y-Position of the entity.
     /// </summary>
     /// <param name="y">Determinates the size of the shifting.</param>
-    public void SetPosY(int y)
+    public void MovePosY(int y)
     {
       this.Position = new Point(this.Position.X, this.Position.Y + y);
     }

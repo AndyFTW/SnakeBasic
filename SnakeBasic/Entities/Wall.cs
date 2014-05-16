@@ -9,9 +9,18 @@ namespace SnakeBasic.Entities
     /// </summary>
     public Wall(Point position)
     {
-      this.RenderingChar = '#';
-
       this.Position = position;
+    }
+
+    /// <summary>
+    /// Gets a value indicating the rendering char of the entity.
+    /// </summary>
+    public override char RenderingChar
+    {
+      get
+      {
+        return '#';
+      }
     }
   }
 }

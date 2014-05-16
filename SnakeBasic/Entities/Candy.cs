@@ -11,8 +11,6 @@ namespace SnakeBasic.Entities
     /// </summary>
     public Candy()
     {
-      this.RenderingChar = '*';
-
       CreateNewCandyPoint();
     }
 
@@ -29,6 +27,14 @@ namespace SnakeBasic.Entities
         DrawHelper.Draw(this.Position, this.RenderingChar);
         return;
       }
+    }
+
+    /// <summary>
+    /// Gets a value indicating the rendering char of the entity.
+    /// </summary>
+    public override char RenderingChar
+    {
+      get { return '*'; }
     }
   }
 }
