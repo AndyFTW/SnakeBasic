@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace SnakeBasic.Helpers
 {
-  public class DrawHelper
+  public static class DrawHelper
   {
     public static void Draw(Point position, char renderingChar)
     {
