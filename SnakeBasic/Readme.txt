@@ -68,31 +68,3 @@ Nicht zulässig ist er, sobald der Richtungswechsel eine 180° Drehung darstelle
 
 Q: Wieso abonnierst du nicht einfach das KeyDown Event um Pfeiltasten zu behandeln?
 A: Konsolenanwendungen stellen kein KeyDown Event zur Verfügung.
-
-Q: Warum gibt es eine Snake.QueuedDirection Eigenschaft?
-A: Als ich diese noch nicht implementiert hatte, beobachtete ich einen Fehler, bei dem die Schlange eine 180° Drehung vollführte
-   und damit in sich selbst "hineinkroch". Dadurch hat man durch die Kollisionsprüfung verloren, da der Kopf der Schlange den Körper trifft.
-   Um das zu vermeiden, habe ich diese Eigenschaft implementiert.
-
-   Warum trat der Fehler auf?
-   Meine Tastaturabfrage läuft asynchron in einer Dauerschleife. Die Position der Schlange wird aber nur (Level 1) alle 100 ms geändert.
-   Wenn man in diesen 100 ms mehrere Pfeiltasten geklickt hat, wurde jede so behandelt, als wäre sie die Aktuelle, soweit sie die Validierung bestanden hat,
-   obwohl sie es noch nicht ist, da die Schlange noch in eine andere Richtung guckt.
-
-   Beispiel:
-   Folgendes geschieht in den 100 ms, also bewegt sich die Schlange nicht
-
-   Blick-Schlange: oben
-   Pfeiltaste rechts
-   Blickrichtungsänderung zulässig? Ja (oben -> rechts = 90°)
-   Blick-Schlange: rechts
-   Pfeiltaste unten
-   Blickrichtungsänderung zulässig? Ja (rechts -> unten = 90°)
-   Blick-Schlange: unten
-
-   100 ms zuende
-   Aktuelle Blickrichtung: unten
-   Schlange kriecht in sich selbst
-
-   QueuedDirection zeigt die Richtung, die falls in diesem Moment die 100 ms um sind, auf die Schlange angewandt wird.
-   Die Überprüfung, ob die Änderung nun aber zulässig ist, wird weiterhin mit der echten Schlangen-Blickrichtung geprüft.

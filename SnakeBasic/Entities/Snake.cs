@@ -68,7 +68,7 @@ namespace SnakeBasic.Entities
     Direction lastDirection;
 
     /// <summary>
-    /// Initializes a new instance of SnakeBasic.Entitys.Snake class.
+    /// Initializes a new instance of SnakeBasic.Entities.Snake class.
     /// </summary>
     public Snake(Point startingPoint, int length)
     {
