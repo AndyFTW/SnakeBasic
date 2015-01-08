@@ -84,7 +84,7 @@ namespace SnakeBasic
     {
       Console.Clear(); // Make sure there is nothing
       Console.BufferWidth = Console.WindowWidth = 35;
-      Console.BufferHeight = Console.WindowHeight;
+      Console.BufferHeight = Console.WindowHeight + 1; // + 1 necessary because without the scroll bar jumps if the snake crosses the edges in the last column
       Console.Title = "SnakeBasic";
       Console.CursorVisible = false;
 
