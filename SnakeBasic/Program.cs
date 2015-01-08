@@ -13,11 +13,6 @@ namespace SnakeBasic
   static class Program
   {
     /// <summary>
-    /// Offers option to capture the last clicked key asynchronous.
-    /// </summary>
-    static Thread keyThread;
-
-    /// <summary>
     /// Gets or sets all existing walls.
     /// </summary>
     public static List<Wall> Walls { get; set; }
@@ -100,19 +95,11 @@ namespace SnakeBasic
 
       ActiveCandy = new Candy();
 
-      #region KeyDown Thread
-
       // Clear existing characters from the buffer
       while (Console.KeyAvailable)
       {
         Console.ReadKey(true);
       }
-
-      keyThread = new Thread(KeyDownLoop);
-      keyThread.IsBackground = true;
-      keyThread.Start();
-
-      #endregion
 
       // Initialize timer, subscribe and start
       SnakeTimer = new Timer(100.0);
@@ -123,6 +110,8 @@ namespace SnakeBasic
 
     static void timer_Elapsed(object sender, ElapsedEventArgs e)
     {
+      HandleLastKey();
+
       /*========== Update position of snakes ==========*/
 
       bool goodyEaten = ActiveSnake.HeadPosition == ActiveCandy.Coordinates[0]; // Checks whether the candy has been eaten
@@ -150,6 +139,36 @@ namespace SnakeBasic
 
 
 
+    /// <summary>
+    /// Handles the last key if there is one.
+    /// </summary>
+    static void HandleLastKey()
+    {
+      while (Console.KeyAvailable)
+      {
+        ConsoleKeyInfo key = Console.ReadKey(true);
+        if (Console.KeyAvailable) continue;
+
+        switch (key.Key)
+        {
+          case ConsoleKey.DownArrow:
+            ActiveSnake.MoveDirection = Direction.Down;
+            break;
+
+          case ConsoleKey.LeftArrow:
+            ActiveSnake.MoveDirection = Direction.Left;
+            break;
+
+          case ConsoleKey.RightArrow:
+            ActiveSnake.MoveDirection = Direction.Right;
+            break;
+
+          case ConsoleKey.UpArrow:
+            ActiveSnake.MoveDirection = Direction.Up;
+            break;
+        }
+      }
+    }
 
     /// <summary>
     /// Shows the game over dialog.
@@ -170,8 +189,6 @@ namespace SnakeBasic
       Console.WriteLine("Repeat?");
       Console.Write("[Y,N]: ");
 
-      keyThread.Abort();
-
 
       string answer = Console.ReadLine();
 
@@ -183,36 +200,6 @@ namespace SnakeBasic
           InitializeGame();
         else
           Environment.Exit(0);
-      }
-    }
-
-    static void KeyDownLoop()
-    {
-      while (true)
-      {
-        if (Console.KeyAvailable)
-        {
-          ConsoleKeyInfo key = Console.ReadKey(true);
-
-          switch (key.Key)
-          {
-            case ConsoleKey.DownArrow:
-              ActiveSnake.MoveDirection = Direction.Down;
-              break;
-
-            case ConsoleKey.LeftArrow:
-              ActiveSnake.MoveDirection = Direction.Left;
-              break;
-
-            case ConsoleKey.RightArrow:
-              ActiveSnake.MoveDirection = Direction.Right;
-              break;
-
-            case ConsoleKey.UpArrow:
-              ActiveSnake.MoveDirection = Direction.Up;
-              break;
-          }
-        }
       }
     }
   }

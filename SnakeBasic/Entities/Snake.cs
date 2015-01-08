@@ -15,11 +15,6 @@ namespace SnakeBasic.Entities
     /// </summary>
     public Point HeadPosition { get; private set; }
 
-    /// <summary>
-    /// Gets a list of points containing the positions of the body.
-    /// </summary>
-    public List<Point> BodyPositions { get; private set; }
-
     public override void Update()
     {
       base.Update();
@@ -53,7 +48,7 @@ namespace SnakeBasic.Entities
     {
       _moveDirection = Direction.Right; // Set default direction
 
-      this.BodyPositions = new List<Point>(); // Initialize
+      this.Coordinates = new List<Point>(); // Initialize
 
       this.HeadPosition = startingPoint;
 
@@ -61,7 +56,7 @@ namespace SnakeBasic.Entities
 
       for (int i = length - 1; i > 0; i--) // -1 because head belongs to length
       {
-        this.BodyPositions.Add(new Point(startingPoint.X - i, startingPoint.Y));
+        this.Coordinates.Add(new Point(startingPoint.X - i, startingPoint.Y));
         DrawHelper.Draw(startingPoint.X - i, startingPoint.Y, this.RenderingChar);
       }
     }
@@ -80,17 +75,17 @@ namespace SnakeBasic.Entities
       // If a goody has been eaten, do not remove last tail, then the snake becomes one unit longer
       if (!ateGoody)
       {
-        var lastBodyPart = this.BodyPositions.First();
+        var lastBodyPart = this.Coordinates.First();
 
         // Clear first body part
         DrawHelper.Draw(lastBodyPart, ' ');
 
-        this.BodyPositions.RemoveAt(0); // Remove the snaketail
+        this.Coordinates.RemoveAt(0); // Remove the snaketail
       }
 
-      this.BodyPositions.Add(this.HeadPosition); // Convert head to part of body
+      this.Coordinates.Add(this.HeadPosition); // Convert head to part of body
 
-      var convertedBodyPart = this.BodyPositions.Last();
+      var convertedBodyPart = this.Coordinates.Last();
       DrawHelper.Draw(convertedBodyPart, this.RenderingChar);
 
       #endregion
@@ -137,7 +132,7 @@ namespace SnakeBasic.Entities
       // Prevents that it always returns itself because it will always find its own head because we just moved it to this place.
       if (collisionEntity is Snake && collisionEntity.Equals(this))
       {
-        if (this.BodyPositions.Contains(this.HeadPosition))
+        if (this.Coordinates.Contains(this.HeadPosition))
           return this;
 
         return null;
