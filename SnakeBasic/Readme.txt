@@ -32,8 +32,8 @@ Insgesamt: 875
     - Konsolenfenster zurücksetzen + Größe setzen
     - Timer starten + abonnieren
 	- Entities erstellen (Wände, Schlange, Süßigkeit)
-	- KeyDown Thread erstellen und starten
 3. Event gefeuert (timer_Elapsed)
+	- Letzten Tastendruck behandeln
     - Position der Schlange wird aktualisiert
 	- Falls Kollision mit Schlange oder Wand -> GameOver()
 	- Falls Kollision mit Süßigkeit -> Schlange wird um eine Einheit länger
@@ -55,10 +55,7 @@ Wall: immer gleiche Stelle => einmalige Zeichnung
 ============================================
 ================== Tastatur ================
 
-Da Konsolenanwendungen kein KeyDown Event bereitstellen, habe ich etwas Eigenes gebaut.
-Die besagte Funktion läuft in einem eigenen Thread in einer Dauerschleife.
-In dieser Frage ich in jedem Durchlauf ab, ob ein nicht behandelter Tastendruck vorhanden ist.
-Falls ja, lies ihn und behandle ihn entsprechend.
+Es wird immer nur die zuletzt gedrückte Taste behandelt.
 
 Zunächst wird geguckt, um welche Pfeiltaste es sich handelt. Anschließend wird geprüft, ob der Richtungswechsel zulässig ist.
 Nicht zulässig ist er, sobald der Richtungswechsel eine 180° Drehung darstellen würde ( z.B. links -> rechts ).
