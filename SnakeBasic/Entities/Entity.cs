@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace SnakeBasic.Entities
 {
@@ -9,20 +10,50 @@ namespace SnakeBasic.Entities
     /// </summary>
     public abstract char RenderingChar { get; }
 
+
+    public Entity()
+    {
+      this.Coordinates = new List<Point>();
+    }
+
+    public List<Point> Coordinates { get; set; }
+
+    protected Dictionary<Point, char> drawn = new Dictionary<Point, char>();
+
+    public Dictionary<Point, char> Drawn
+    {
+      get { return drawn; }
+    }
+
+    public virtual void Update()
+    {
+      drawn.Clear();
+      foreach (var coord in this.Coordinates)
+      {
+        drawn.Add(coord, this.RenderingChar);
+      }
+    }
+
     /// <summary>
-    /// Gets or sets the position of the entity.
+    /// Gets a value indicating the length of the snake. Including the head.
     /// </summary>
-    public Point Position { get; set; }
+    public int Length
+    {
+      get { return this.Coordinates.Count; }
+    }
 
     #region Position
 
     /// <summary>
-    /// Changes the Y-Position of the entity.
+    /// Changes the X-Position of the entity.
     /// </summary>
     /// <param name="x">Determinates the size of the shifting.</param>
     public void MovePosX(int x)
     {
-      this.Position = new Point(this.Position.X + x, this.Position.Y);
+      for (int i = 0; i < this.Coordinates.Count; i++)
+      {
+        this.Coordinates[i] = new Point(this.Coordinates[i].X + x, this.Coordinates[i].Y);
+      }
     }
 
     /// <summary>
@@ -31,7 +62,10 @@ namespace SnakeBasic.Entities
     /// <param name="y">Determinates the size of the shifting.</param>
     public void MovePosY(int y)
     {
-      this.Position = new Point(this.Position.X, this.Position.Y + y);
+      for (int i = 0; i < this.Coordinates.Count; i++)
+      {
+        this.Coordinates[i] = new Point(this.Coordinates[i].X, this.Coordinates[i].Y + y);
+      }
     }
 
     #endregion
@@ -41,7 +75,7 @@ namespace SnakeBasic.Entities
     /// </summary>
     /// <param name="obj">Specifies the origin entity.</param>
     /// <remarks>The search is performed clockwise.</remarks>
-    public Entity FindNextEntity(Entity obj)
+    public Entity FindNextEntity()
     {
       // obj: O
       // to search points: X
@@ -50,12 +84,18 @@ namespace SnakeBasic.Entities
       // XOX
       // XXX
 
-      Point origin = obj.Position; // Reference to Position of given entity
+      foreach (var coord in this.Coordinates)
+      {
+        var result = Program.EntityAt(coord.X, coord.Y - 1) // Check field over entity
+            ?? Program.EntityAt(coord.X + 1, coord.Y) // Check field on the right side of entity
+            ?? Program.EntityAt(coord.X, coord.Y + 1) // Check field under entity
+            ?? Program.EntityAt(coord.X - 1, coord.Y);// Check field on the left side of entity
 
-      return Program.EntityAt(origin.X, origin.Y - 1) // Check field over entity
-          ?? Program.EntityAt(origin.X + 1, origin.Y) // Check field on the right side of entity
-          ?? Program.EntityAt(origin.X, origin.Y + 1) // Check field under entity
-          ?? Program.EntityAt(origin.X - 1, origin.Y);// Check field on the left side of entity
+        if (result != null && result != this)
+          return result;
+      }
+
+      return null;
     }
 
     /// <summary>
@@ -68,7 +108,7 @@ namespace SnakeBasic.Entities
       if (ReferenceEquals(null, obj)) return false; // obj shows to no heap space
       if (ReferenceEquals(this, obj)) return true; // obj and this shows to same heap space
       if (obj.GetType() != this.GetType()) return false; // Don't have the same type
-      return this.Position.Equals(ent.Position) && this.RenderingChar == ent.RenderingChar;
+      return this.Coordinates.Equals(ent.Coordinates) && this.RenderingChar == ent.RenderingChar;
     }
   }
 }

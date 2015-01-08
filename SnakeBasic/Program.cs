@@ -10,8 +10,28 @@ using Timer = System.Timers.Timer;
 
 namespace SnakeBasic
 {
-  static partial class Program
+  static class Program
   {
+    /// <summary>
+    /// Offers option to capture the last clicked key asynchronous.
+    /// </summary>
+    static Thread keyThread;
+
+    /// <summary>
+    /// Gets or sets all existing walls.
+    /// </summary>
+    public static List<Wall> Walls { get; set; }
+
+    /// <summary>
+    /// Gets or sets the snake.
+    /// </summary>
+    public static Snake ActiveSnake { get; set; }
+
+    /// <summary>
+    /// Gets or sets the current goody.
+    /// </summary>
+    public static Candy ActiveCandy { get; set; }
+
     /// <summary>
     /// Gets all entities.
     /// </summary>
@@ -49,11 +69,7 @@ namespace SnakeBasic
     /// <param name="position">The point of the entity to retrieve.</param>
     public static Entity EntityAt(Point position)
     {
-      Entity result = Entities.FirstOrDefault(x => x.Position == position);
-      if (result != null)
-        return result;
-
-      return ActiveSnake.Position.Contains(position) ? ActiveSnake : null;
+      return Entities.FirstOrDefault(x => x.Coordinates.Contains(position));
     }
 
     /// <summary>
@@ -80,7 +96,7 @@ namespace SnakeBasic
       Walls = new List<Wall>(); // Initialize
       ActiveSnake = new Snake(new Point(10, 10), 4); // Initialize snake
 
-      Walls = LevelHelper.LoadWalls(WallFormation.FourCrosses | WallFormation.Rectangle);
+      Walls = LevelHelper.LoadWalls(WallFormation.FourCrosses);
 
       ActiveCandy = new Candy();
 
@@ -109,13 +125,14 @@ namespace SnakeBasic
     {
       /*========== Update position of snakes ==========*/
 
-      bool goodyEaten = ActiveSnake.Head == ActiveCandy.Position; // Checks whether the candy has been eaten
+      bool goodyEaten = ActiveSnake.HeadPosition == ActiveCandy.Coordinates[0]; // Checks whether the candy has been eaten
 
-      Entity collisionEntity = ActiveSnake.UpdatePosition(ActiveSnake.Head == ActiveCandy.Position); // Can't use 'goodyEaten' here because when the first snake made the bool variable true, it will stay true, even if the next snake didn't eat a candy
+      Entity collisionEntity = ActiveSnake.UpdatePosition(goodyEaten);
 
       if (collisionEntity is Wall || collisionEntity is Snake) // If snake collided with a wall or itself, the game is over
       {
         GameOver();
+        return;
       }
 
       /*==================================================*/

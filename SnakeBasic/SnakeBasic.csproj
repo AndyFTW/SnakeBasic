@@ -45,7 +45,6 @@
     <Compile Include="Entities\Snake.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="Helpers\DrawHelper.cs" />
-    <Compile Include="Misc.cs" />
     <Compile Include="Helpers\Enumerations.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Program.cs" />

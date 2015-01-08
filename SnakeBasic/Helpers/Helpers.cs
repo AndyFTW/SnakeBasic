@@ -28,8 +28,8 @@ namespace SnakeBasic.Helpers
 
           walls.Add(new Wall(new Point(i, Console.WindowHeight - 1)));
 
-          DrawHelper.Draw(walls[walls.Count - 2].Position, walls[walls.Count - 2].RenderingChar);
-          DrawHelper.Draw(walls.Last().Position, walls.Last().RenderingChar);
+          DrawHelper.Draw(walls[walls.Count - 2].Coordinates[0], walls[walls.Count - 2].RenderingChar);
+          DrawHelper.Draw(walls.Last().Coordinates[0], walls.Last().RenderingChar);
         }
 
         for (int i = 1; i < Console.WindowHeight; i++) // Start by one, because [0,0] already has been added with first loop
@@ -125,7 +125,7 @@ namespace SnakeBasic.Helpers
 
       foreach (Wall wall in walls)
       {
-        DrawHelper.Draw(wall.Position, wall.RenderingChar);
+        DrawHelper.Draw(wall.Coordinates[0], wall.RenderingChar);
       }
 
       #endregion

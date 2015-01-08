@@ -8,57 +8,36 @@ namespace SnakeBasic.Entities
 {
   public class Snake : Entity
   {
+    public const char HEAD_CHARACTER = '@';
+
     /// <summary>
-    /// Gets value indicating the position of the head. The body automatic fits.
+    /// Gets value indicating the position of the head..
     /// </summary>
-    public Point Head { get; private set; }
+    public Point HeadPosition { get; private set; }
 
     /// <summary>
     /// Gets a list of points containing the positions of the body.
     /// </summary>
-    public List<Point> Body { get; private set; }
+    public List<Point> BodyPositions { get; private set; }
 
-    /// <summary>
-    /// Gets a list of all points the snake uses. The head is always the last point.
-    /// </summary>
-    public new List<Point> Position
+    public override void Update()
     {
-      get
-      {
-        return new List<Point>(this.Body)
-                    {
-                        this.Head
-                    };
-      }
+      base.Update();
+
+      drawn[HeadPosition] = HEAD_CHARACTER;
     }
 
-    /// <summary>
-    /// Gets a value indicating the length of the snake. Including the head.
-    /// </summary>
-    public int Length
-    {
-      get { return this.Position.Count; }
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating the rendering char of the head of the snake.
-    /// </summary>
-    public char HeadRenderingChar
-    {
-      get { return '@'; }
-    }
-
-    Direction _MoveDirection;
+    Direction _moveDirection;
     /// <summary>
     /// Gets or sets a value indicating the direction the snake moves.
     /// </summary>
     public Direction MoveDirection
     {
-      get { return _MoveDirection; }
+      get { return _moveDirection; }
       set
       {
         if (IsValidMovementChange(value))
-          _MoveDirection = value;
+          _moveDirection = value;
       }
     }
 
@@ -72,17 +51,17 @@ namespace SnakeBasic.Entities
     /// </summary>
     public Snake(Point startingPoint, int length)
     {
-      _MoveDirection = Direction.Right; // Set default direction
+      _moveDirection = Direction.Right; // Set default direction
 
-      this.Body = new List<Point>(); // Initialize
+      this.BodyPositions = new List<Point>(); // Initialize
 
-      this.Head = startingPoint;
+      this.HeadPosition = startingPoint;
 
-      DrawHelper.Draw(this.Head, this.HeadRenderingChar); // Draw head the first time
+      DrawHelper.Draw(this.HeadPosition, HEAD_CHARACTER); // Draw head the first time
 
       for (int i = length - 1; i > 0; i--) // -1 because head belongs to length
       {
-        this.Body.Add(new Point(startingPoint.X - i, startingPoint.Y));
+        this.BodyPositions.Add(new Point(startingPoint.X - i, startingPoint.Y));
         DrawHelper.Draw(startingPoint.X - i, startingPoint.Y, this.RenderingChar);
       }
     }
@@ -93,25 +72,25 @@ namespace SnakeBasic.Entities
     /// <param name="ateGoody">Indicates whether a goody was eaten by the snake.</param>
     public Entity UpdatePosition(bool ateGoody = false)
     {
-      lastDirection = this.MoveDirection; // Assign lastDirection for further validations
+      lastDirection = this.MoveDirection; // Cache lastDirection for further validations
 
       #region Update Body
 
-      if (!ateGoody) // Don't remove it, then the snake gets one unit longer
+      // Remove the last tail if no goody has been eaten.
+      // If a goody has been eaten, do not remove last tail, then the snake becomes one unit longer
+      if (!ateGoody)
       {
-        var firstBodyPart = this.Body.First();
+        var lastBodyPart = this.BodyPositions.First();
 
-        DrawHelper.Draw(firstBodyPart, ' ');
+        // Clear first body part
+        DrawHelper.Draw(lastBodyPart, ' ');
 
-        this.Body.RemoveAt(0); // Remove the snaketail
-        // or
-        // this.Body.Remove(this.Body.First());
-        // but the first solution is faster 
+        this.BodyPositions.RemoveAt(0); // Remove the snaketail
       }
 
-      this.Body.Add(this.Head); // Convert head to part of body
+      this.BodyPositions.Add(this.HeadPosition); // Convert head to part of body
 
-      var convertedBodyPart = this.Body.Last();
+      var convertedBodyPart = this.BodyPositions.Last();
       DrawHelper.Draw(convertedBodyPart, this.RenderingChar);
 
       #endregion
@@ -121,44 +100,44 @@ namespace SnakeBasic.Entities
       switch (this.MoveDirection)
       {
         case Direction.Up:
-          this.Head = new Point(this.Head.X, this.Head.Y - 1);
+          this.HeadPosition = new Point(this.HeadPosition.X, this.HeadPosition.Y - 1);
           break;
 
         case Direction.Right:
-          this.Head = new Point(this.Head.X + 1, this.Head.Y);
+          this.HeadPosition = new Point(this.HeadPosition.X + 1, this.HeadPosition.Y);
           break;
 
         case Direction.Down:
-          this.Head = new Point(this.Head.X, this.Head.Y + 1);
+          this.HeadPosition = new Point(this.HeadPosition.X, this.HeadPosition.Y + 1);
           break;
 
         case Direction.Left:
-          this.Head = new Point(this.Head.X - 1, this.Head.Y);
+          this.HeadPosition = new Point(this.HeadPosition.X - 1, this.HeadPosition.Y);
           break;
       }
 
-      // These 'if'-clauses make sure it's possible for the snake to go through the walls
-      if (this.Head.X == -1)
-        this.Head = new Point(Console.WindowWidth - 1, this.Head.Y);
-      else if (this.Head.X == Console.WindowWidth)
-        this.Head = new Point(0, this.Head.Y);
-      else if (this.Head.Y == -1)
-        this.Head = new Point(this.Head.X, Console.WindowHeight - 1);
-      else if (this.Head.Y == Console.WindowHeight)
-        this.Head = new Point(this.Head.X, 0);
+      // These 'if'-clauses make sure it's possible for the snake to go through edges
+      if (this.HeadPosition.X == -1)
+        this.HeadPosition = new Point(Console.WindowWidth - 1, this.HeadPosition.Y);
+      else if (this.HeadPosition.X == Console.WindowWidth)
+        this.HeadPosition = new Point(0, this.HeadPosition.Y);
+      else if (this.HeadPosition.Y == -1)
+        this.HeadPosition = new Point(this.HeadPosition.X, Console.WindowHeight - 1);
+      else if (this.HeadPosition.Y == Console.WindowHeight)
+        this.HeadPosition = new Point(this.HeadPosition.X, 0);
 
-      DrawHelper.Draw(this.Head, this.HeadRenderingChar);
+      DrawHelper.Draw(this.HeadPosition, HEAD_CHARACTER);
 
       #endregion
 
       #region Collision Entity
 
-      Entity collisionEntity = Program.EntityAt(this.Head);
+      Entity collisionEntity = Program.EntityAt(this.HeadPosition);
 
       // Prevents that it always returns itself because it will always find its own head because we just moved it to this place.
       if (collisionEntity is Snake && collisionEntity.Equals(this))
       {
-        if (this.Body.Contains(this.Head))
+        if (this.BodyPositions.Contains(this.HeadPosition))
           return this;
 
         return null;

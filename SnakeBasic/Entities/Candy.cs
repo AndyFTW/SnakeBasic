@@ -20,11 +20,14 @@ namespace SnakeBasic.Entities
       {
         Point suggestion = LevelHelper.GetRandomPoint();
 
-        if (Program.ActiveSnake.Body.Contains(suggestion) || Program.ActiveSnake.Head == suggestion || Program.Walls.Any(x => x.Position == suggestion))
+        if (Program.ActiveSnake.Coordinates.Contains(suggestion) || Program.Walls.Any(x => x.Coordinates.Contains(suggestion)))
           continue;
 
-        this.Position = suggestion;
-        DrawHelper.Draw(this.Position, this.RenderingChar);
+        if (this.Coordinates.Count == 1)
+          this.Coordinates[0] = suggestion;
+        else
+          this.Coordinates.Add(suggestion);
+        DrawHelper.Draw(this.Coordinates[0], this.RenderingChar);
         return;
       }
     }

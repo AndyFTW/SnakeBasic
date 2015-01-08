@@ -9,7 +9,7 @@ namespace SnakeBasic.Entities
     /// </summary>
     public Wall(Point position)
     {
-      this.Position = position;
+      this.Coordinates.Add(position);
     }
 
     /// <summary>
