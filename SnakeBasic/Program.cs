@@ -84,7 +84,7 @@ namespace SnakeBasic
     {
       Console.Clear(); // Make sure there is nothing
       Console.BufferWidth = Console.WindowWidth = 35;
-      Console.BufferHeight = Console.WindowHeight + 1;
+      Console.BufferHeight = Console.WindowHeight;
       Console.Title = "SnakeBasic";
       Console.CursorVisible = false;
 
