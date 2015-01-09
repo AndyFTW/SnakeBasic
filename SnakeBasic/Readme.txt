@@ -13,7 +13,6 @@ Ende: ???
 |
 |
 V
-
 y
 
 Y zeigt nach unten, da es so leichter ist, Zeile für Zeile zu zeichnen.
@@ -27,12 +26,11 @@ Insgesamt: 875
 ============================================
 ================== Ablauf ==================
 
-1. Initialisierung von 'objects' + 'comparisonObjects' mit dem Wert 'Object.Empty', da 'Empty' der Standardwert ist.
-2. InitializeComponent()
+1. InitializeComponent()
     - Konsolenfenster zurücksetzen + Größe setzen
     - Timer starten + abonnieren
 	- Entities erstellen (Wände, Schlange, Süßigkeit)
-3. Event gefeuert (timer_Elapsed)
+2. Event gefeuert (timer_Elapsed)
 	- Letzten Tastendruck behandeln
     - Position der Schlange wird aktualisiert
 	- Falls Kollision mit Schlange oder Wand -> GameOver()
@@ -48,7 +46,7 @@ Wall: Verbotene Zone für die Schlange
 ============================================
 ================ Neuzeichnung ==============
 
-Snake: Positionsänderung alle 0.1s => häufige Zeichnung (wird von lvl zu lvl häufiger)
+Snake: Positionsänderung alle 100 ms => häufige Zeichnung
 Candy: sobald eingesammelt => seltene Zeichnung
 Wall: immer gleiche Stelle => einmalige Zeichnung
 
@@ -58,7 +56,7 @@ Wall: immer gleiche Stelle => einmalige Zeichnung
 Es wird immer nur die zuletzt gedrückte Taste behandelt.
 
 Zunächst wird geguckt, um welche Pfeiltaste es sich handelt. Anschließend wird geprüft, ob der Richtungswechsel zulässig ist.
-Nicht zulässig ist er, sobald der Richtungswechsel eine 180° Drehung darstellen würde ( z.B. links -> rechts ).
+Nicht zulässig ist er, sobald der Richtungswechsel eine 180° Drehung darstellen würde ( z.B. links zu rechts ).
 
 ============================================
 ==================== Q&A ===================
