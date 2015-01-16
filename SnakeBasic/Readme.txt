@@ -24,26 +24,6 @@ Zeile: 25
 Insgesamt: 875
 
 ============================================
-================== Ablauf ==================
-
-1. InitializeComponent()
-    - Konsolenfenster zurücksetzen + Größe setzen
-    - Timer starten + abonnieren
-	- Entities erstellen (Wände, Schlange, Süßigkeit)
-2. Event gefeuert (timer_Elapsed)
-	- Letzten Tastendruck behandeln
-    - Position der Schlange wird aktualisiert
-	- Falls Kollision mit Schlange oder Wand -> GameOver()
-	- Falls Kollision mit Süßigkeit -> Schlange wird um eine Einheit länger
-
-============================================
-================== Entities ================
-
-Snake: Die Schlange
-Candy: Für jede Süßigkeit wird die Schlange um ein Body Index erweitert => Schlange wird länger
-Wall: Verbotene Zone für die Schlange
-
-============================================
 ================ Neuzeichnung ==============
 
 Snake: Positionsänderung alle 100 ms => häufige Zeichnung
