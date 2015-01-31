@@ -43,7 +43,7 @@ namespace SnakeBasic
     }
 
     /// <summary>
-    /// Gets the timer who controls the movement interval of the snake.
+    /// Gets the timer which controls the movement interval of the snake.
     /// </summary>
     public static Timer SnakeTimer { get; private set; }
 
@@ -85,6 +85,7 @@ namespace SnakeBasic
       Console.Clear(); // Make sure there is nothing
       Console.BufferWidth = Console.WindowWidth = 35;
       Console.BufferHeight = Console.WindowHeight + 1; // + 1 necessary because without the scroll bar jumps if the snake crosses the edges in the last column
+      Console.SetWindowSize(Console.BufferWidth, Console.BufferHeight); // Set window size to buffer size to avoid scroll bars
       Console.Title = "SnakeBasic";
       Console.CursorVisible = false;
 
@@ -112,7 +113,7 @@ namespace SnakeBasic
     {
       HandleLastKey();
 
-      /*========== Update position of snakes ==========*/
+      #region Update position of snake
 
       bool goodyEaten = ActiveSnake.HeadPosition == ActiveCandy.Coordinates[0]; // Checks whether the candy has been eaten
 
@@ -124,9 +125,11 @@ namespace SnakeBasic
         return;
       }
 
-      /*==================================================*/
-      /*==================================================*/
+      #endregion
 
+
+      // If goody eaten, we increase the speed by 1 ms
+      // Minimum interval is 20 ms
       if (goodyEaten)
       {
         ActiveCandy = new Candy();
