@@ -37,11 +37,6 @@ namespace SnakeBasic.Entities
     }
 
     /// <summary>
-    /// Indicates the last direction the snake moved.
-    /// </summary>
-    Direction lastDirection;
-
-    /// <summary>
     /// Initializes a new instance of SnakeBasic.Entities.Snake class.
     /// </summary>
     public Snake(Point startingPoint, int length)
@@ -67,8 +62,6 @@ namespace SnakeBasic.Entities
     /// <param name="ateGoody">Indicates whether a goody was eaten by the snake.</param>
     public Entity UpdatePosition(bool ateGoody = false)
     {
-      lastDirection = this.MoveDirection; // Cache lastDirection for further validations
-
       #region Update Body
 
       // Remove the last tail if no goody has been eaten.
@@ -149,16 +142,16 @@ namespace SnakeBasic.Entities
     /// <param name="dir">Specifies the direction to check.</param>
     private bool IsValidMovementChange(Direction dir)
     {
-      if (lastDirection == Direction.Down && dir == Direction.Up)
+      if (this.MoveDirection == Direction.Down && dir == Direction.Up)
         return false;
 
-      if (lastDirection == Direction.Up && dir == Direction.Down)
+      if (this.MoveDirection == Direction.Up && dir == Direction.Down)
         return false;
 
-      if (lastDirection == Direction.Left && dir == Direction.Right)
+      if (this.MoveDirection == Direction.Left && dir == Direction.Right)
         return false;
 
-      if (lastDirection == Direction.Right && dir == Direction.Left)
+      if (this.MoveDirection == Direction.Right && dir == Direction.Left)
         return false;
 
       return true;

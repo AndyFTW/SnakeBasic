@@ -147,6 +147,9 @@ namespace SnakeBasic
       while (Console.KeyAvailable)
       {
         ConsoleKeyInfo key = Console.ReadKey(true);
+
+        // Only process key if it is the last one.
+        // We only want to the handle the last clicked key.
         if (Console.KeyAvailable) continue;
 
         switch (key.Key)
