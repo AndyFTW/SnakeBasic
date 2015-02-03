@@ -5,7 +5,7 @@ namespace SnakeBasic.Entities
   public class Wall : Entity
   {
     /// <summary>
-    /// Initializes a new instance of SnakeBasic.Entitys.Wall class.
+    /// Initializes a new instance of SnakeBasic.Entities.Wall class.
     /// </summary>
     public Wall(Point position)
     {

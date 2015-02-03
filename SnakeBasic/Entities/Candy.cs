@@ -7,7 +7,7 @@ namespace SnakeBasic.Entities
   public class Candy : Entity
   {
     /// <summary>
-    /// Initializes a new instance of SnakeBasic.Entitys.Candy class.
+    /// Initializes a new instance of SnakeBasic.Entities.Candy class.
     /// </summary>
     public Candy()
     {
