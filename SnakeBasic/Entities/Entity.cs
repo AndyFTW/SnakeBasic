@@ -13,24 +13,29 @@ namespace SnakeBasic.Entities
 
     public Entity()
     {
+      this.Drawn = new Dictionary<Point, char>();
       this.Coordinates = new List<Point>();
     }
 
+    /// <summary>
+    /// Specifies the points containing the entity.
+    /// </summary>
     public List<Point> Coordinates { get; set; }
 
-    protected Dictionary<Point, char> drawn = new Dictionary<Point, char>();
+    /// <summary>
+    /// Specifies the points containing the entity with the character representing the entity at this point.
+    /// </summary>
+    public Dictionary<Point, char> Drawn { get; private set; }
 
-    public Dictionary<Point, char> Drawn
-    {
-      get { return drawn; }
-    }
-
+    /// <summary>
+    /// Redraws the entity.
+    /// </summary>
     public virtual void Update()
     {
-      drawn.Clear();
+      this.Drawn.Clear();
       foreach (var coord in this.Coordinates)
       {
-        drawn.Add(coord, this.RenderingChar);
+        this.Drawn.Add(coord, this.RenderingChar);
       }
     }
 

@@ -19,7 +19,7 @@ namespace SnakeBasic.Entities
     {
       base.Update();
 
-      drawn[HeadPosition] = HEAD_CHARACTER;
+      this.Drawn[HeadPosition] = HEAD_CHARACTER;
     }
 
     Direction _moveDirection;
