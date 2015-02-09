@@ -1,2 +1,3 @@
 *.suo
-SnakeBasic/*
+SnakeBasic/bin/
+SnakeBasic/obj/

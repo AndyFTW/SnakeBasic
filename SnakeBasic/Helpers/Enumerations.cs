@@ -3,37 +3,6 @@
 namespace SnakeBasic.Helpers
 {
 	/// <summary>
-	/// Specifies an object that can be rendered in the console.
-	/// </summary>
-	public enum EntityType
-	{
-		/// <summary>
-		/// Nothing.
-		/// </summary>
-		Empty,
-		/// <summary>
-		/// The object wall.
-		/// </summary>
-		Wall,
-		/// <summary>
-		/// Part of the body of the snake.
-		/// </summary>
-		SnakeBody,
-		/// <summary>
-		/// Head of the snake.
-		/// </summary>
-		SnakeHead,
-		/// <summary>
-		/// Tail of the snake.
-		/// </summary>
-		SnakeTail,
-		/// <summary>
-		/// The object candy.
-		/// </summary>
-		Candy
-	}
-
-	/// <summary>
 	/// Specifies a direction.
 	/// </summary>
 	public enum Direction
