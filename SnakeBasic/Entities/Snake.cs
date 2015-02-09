@@ -59,14 +59,14 @@ namespace SnakeBasic.Entities
 		/// <summary>
 		/// Updates the position of the snake depending on the move direction.
 		/// </summary>
-		/// <param name="ateGoody">Indicates whether a goody was eaten by the snake.</param>
-		public Entity UpdatePosition(bool ateGoody = false)
+		/// <param name="ateCandy">Indicates whether a candy was eaten by the snake.</param>
+		public Entity UpdatePosition(bool ateCandy = false)
 		{
 			#region Update Body
 
-			// Remove the last tail if no goody has been eaten.
-			// If a goody has been eaten, do not remove last tail, then the snake becomes one unit longer
-			if (!ateGoody)
+			// Remove the last tail if no candy has been eaten.
+			// If a candy has been eaten, do not remove last tail, then the snake becomes one unit longer
+			if (!ateCandy)
 			{
 				var lastBodyPart = Coordinates.First();
 

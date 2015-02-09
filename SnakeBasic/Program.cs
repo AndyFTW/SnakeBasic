@@ -23,7 +23,7 @@ namespace SnakeBasic
 		public static Snake ActiveSnake { get; set; }
 
 		/// <summary>
-		/// Gets or sets the current goody.
+		/// Gets or sets the current candy.
 		/// </summary>
 		public static Candy ActiveCandy { get; set; }
 
@@ -117,9 +117,9 @@ namespace SnakeBasic
 
 			#region Update position of snake
 
-			bool goodyEaten = ActiveSnake.HeadPosition == ActiveCandy.Coordinates[0]; // Checks whether the candy has been eaten
+			bool candyEaten = ActiveSnake.HeadPosition == ActiveCandy.Coordinates[0]; // Checks whether the candy has been eaten
 
-			Entity collisionEntity = ActiveSnake.UpdatePosition(goodyEaten);
+			Entity collisionEntity = ActiveSnake.UpdatePosition(candyEaten);
 
 			if (collisionEntity is Wall || collisionEntity is Snake) // If snake collided with a wall or itself, the game is over
 			{
@@ -130,9 +130,9 @@ namespace SnakeBasic
 			#endregion
 
 
-			// If goody eaten, we increase the speed by 2 ms
+			// If candy eaten, we increase the speed by 2 ms
 			// Minimum interval is 20 ms
-			if (goodyEaten)
+			if (candyEaten)
 			{
 				ActiveCandy = new Candy();
 				if (SnakeTimer.Interval > 20.0)
@@ -198,21 +198,19 @@ namespace SnakeBasic
 
 			string answer;
 
-			do
+			while (true)
 			{
 				answer = Console.ReadLine();
 
-				if (answer.Length > 0)
-				{
-					char key = answer.ToUpper()[0];
+				if (answer.Length == 0) continue;
 
-					if (key == 'Y')
-						InitializeGame();
-					else
-						Environment.Exit(0);
-				}
+				char key = answer.ToUpper()[0];
+
+				if (key == 'Y')
+					InitializeGame();
+				else
+					Environment.Exit(0);
 			}
-			while (answer.Length == 0);
 		}
 	}
 }
