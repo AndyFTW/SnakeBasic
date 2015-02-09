@@ -8,22 +8,22 @@ namespace SnakeBasic.Helpers
 	public enum Direction
 	{
 		/// <summary>
-		/// The directory right.
+		/// The direction right.
 		/// </summary>
 		Right,
 
 		/// <summary>
-		/// The directory down.
+		/// The direction down.
 		/// </summary>
 		Down,
 
 		/// <summary>
-		/// The directory left.
+		/// The direction left.
 		/// </summary>
 		Left,
 
 		/// <summary>
-		/// The directory up.
+		/// The direction up.
 		/// </summary>
 		Up
 	}
