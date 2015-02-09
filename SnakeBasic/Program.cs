@@ -92,7 +92,7 @@ namespace SnakeBasic
 			Console.Clear(); // Ensure there is nothing
 
 			Walls = new List<Wall>(); // Initialize
-			ActiveSnake = new Snake(new Point(10, 10), 4); // Initialize snake
+			ActiveSnake = new Snake(new Point(10, 10), 4); // Initialize
 
 			Walls = LevelHelper.LoadWalls(WallFormation.FourCrosses);
 
@@ -130,13 +130,13 @@ namespace SnakeBasic
 			#endregion
 
 
-			// If goody eaten, we increase the speed by 1 ms
+			// If goody eaten, we increase the speed by 2 ms
 			// Minimum interval is 20 ms
 			if (goodyEaten)
 			{
 				ActiveCandy = new Candy();
 				if (SnakeTimer.Interval > 20.0)
-					SnakeTimer.Interval -= 1.0;
+					SnakeTimer.Interval -= 2.0;
 			}
 
 			SnakeTimer.Start();
