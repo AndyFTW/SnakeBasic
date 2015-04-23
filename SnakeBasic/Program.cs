@@ -207,7 +207,10 @@ namespace SnakeBasic
 				char key = answer.ToUpper()[0];
 
 				if (key == 'Y')
+				{
 					InitializeGame();
+					break;
+				}
 				else
 					Environment.Exit(0);
 			}
