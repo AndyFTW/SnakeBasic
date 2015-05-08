@@ -18,15 +18,15 @@ Y points down, so it's easier to draw line by line
 
 Maximum characters of default console window:
 
-Column: 35
-Line: 25
-Total: 875
+* Column: 35
+* Line: 25
+* Total: 875
 
 # Redraw
 
-Snake: Changes position as level goes by => frequent refresh
-Candy: as soon as collected => rare refresh
-Wall: always same position => no refresh, only initial draw
+* Snake: Changes position as level goes by => frequent refresh
+* Candy: as soon as collected => rare refresh
+* Wall: always same position => no refresh, only initial draw
 
 # Keyboard
 
@@ -38,4 +38,5 @@ The direction change is not allowed, if the rotation would be 180 degrees (e.g.:
 # Q&A
 
 Q: Why don't you just subscribe to the KeyDown Event to process the arrow keys?
+
 A: Console applications don't supply a KeyDown Event.
