@@ -39,7 +39,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Readme.txt" />
     <Compile Include="Entities\Candy.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Snake.cs" />
