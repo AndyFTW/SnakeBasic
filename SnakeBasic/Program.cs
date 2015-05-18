@@ -196,24 +196,23 @@ namespace SnakeBasic
 			Console.WriteLine("Repeat?");
 			Console.Write("[Y,N]: ");
 
-			string answer;
-
+			String answer;
 			while (true)
 			{
 				answer = Console.ReadLine();
 
-				if (answer.Length == 0) continue;
-
-				char key = answer.ToUpper()[0];
-
-				if (key == 'Y')
-				{
-					InitializeGame();
-					break;
-				}
-				else
-					Environment.Exit(0);
+				if (answer.Length > 0) break;
 			}
+
+			char key = answer.ToUpper()[0];
+
+			if (key == 'Y')
+			{
+				InitializeGame();
+				return;
+			}
+
+			Environment.Exit(0);
 		}
 	}
 }
