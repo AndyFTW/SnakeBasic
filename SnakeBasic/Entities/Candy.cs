@@ -35,9 +35,6 @@ namespace SnakeBasic.Entities
 		/// <summary>
 		/// Gets a value indicating the rendering char of the entity.
 		/// </summary>
-		public override char RenderingChar
-		{
-			get { return '*'; }
-		}
+		public override char RenderingChar => '*';
 	}
 }

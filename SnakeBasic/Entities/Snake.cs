@@ -157,9 +157,6 @@ namespace SnakeBasic.Entities
 		/// <summary>
 		/// Gets a value indicating the rendering char of the entity.
 		/// </summary>
-		public override char RenderingChar
-		{
-			get { return '0'; }
-		}
+		public override char RenderingChar => '0';
 	}
 }

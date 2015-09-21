@@ -25,7 +25,7 @@ namespace SnakeBasic.Entities
 		/// <summary>
 		/// Specifies the points containing the entity with the character representing the entity at this point.
 		/// </summary>
-		public Dictionary<Point, char> Drawn { get; private set; }
+		public Dictionary<Point, char> Drawn { get; }
 
 		/// <summary>
 		/// Redraws the entity.
@@ -42,12 +42,9 @@ namespace SnakeBasic.Entities
 		/// <summary>
 		/// Gets a value indicating the length of the snake. Including the head.
 		/// </summary>
-		public int Length
-		{
-			get { return Coordinates.Count; }
-		}
+		public int Length => Coordinates.Count;
 
-		#region Position
+	    #region Position
 
 		/// <summary>
 		/// Changes the X-Position of the entity.
