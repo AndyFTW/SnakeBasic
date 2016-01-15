@@ -6,47 +6,47 @@ using System.Linq;
 
 namespace SnakeBasic.Helpers
 {
-	public static class LevelHelper
-	{
-		/// <summary>
-		/// Creates and loads walls.
-		/// </summary>
-		/// <param name="formation">Specifies the map construction to load.</param>
-		public static List<Wall> LoadWalls(WallFormation formation)
-		{
-			#region Create Walls
+    public static class LevelHelper
+    {
+        /// <summary>
+        /// Creates and loads walls.
+        /// </summary>
+        /// <param name="formation">Specifies the map construction to load.</param>
+        public static List<Wall> LoadWalls(WallFormation formation)
+        {
+            #region Create Walls
 
-			#region Rectangle
+            #region Rectangle
 
-			List<Wall> walls = new List<Wall>();
+            List<Wall> walls = new List<Wall>();
 
-			if (formation.HasFlag(WallFormation.Rectangle))
-			{
-				for (int i = 0; i < Console.WindowWidth; i++)
-				{
-					walls.Add(new Wall(new Point(i, 0)));
+            if (formation.HasFlag(WallFormation.Rectangle))
+            {
+                for (int i = 0; i < Console.WindowWidth; i++)
+                {
+                    walls.Add(new Wall(new Point(i, 0)));
 
-					walls.Add(new Wall(new Point(i, Console.WindowHeight - 1)));
+                    walls.Add(new Wall(new Point(i, Console.WindowHeight - 1)));
 
-					DrawHelper.Draw(walls[walls.Count - 2].Coordinates[0], walls[walls.Count - 2].RenderingChar);
-					DrawHelper.Draw(walls.Last().Coordinates[0], walls.Last().RenderingChar);
-				}
+                    DrawHelper.Draw(walls[walls.Count - 2].Coordinates[0], walls[walls.Count - 2].RenderingChar);
+                    DrawHelper.Draw(walls.Last().Coordinates[0], walls.Last().RenderingChar);
+                }
 
-				for (int i = 1; i < Console.WindowHeight; i++) // Start by one, because [0,0] already has been added with first loop
-				{
-					walls.Add(new Wall(new Point(0, i)));
+                for (int i = 1; i < Console.WindowHeight; i++) // Start by one, because [0,0] already has been added with first loop
+                {
+                    walls.Add(new Wall(new Point(0, i)));
 
-					walls.Add(new Wall(new Point(Console.WindowWidth - 1, i)));
-				}
-			}
+                    walls.Add(new Wall(new Point(Console.WindowWidth - 1, i)));
+                }
+            }
 
-			#endregion
+            #endregion
 
-			#region 4 Crosses
+            #region 4 Crosses
 
-			if (formation.HasFlag(WallFormation.FourCrosses))
-			{
-				var newWalls = new List<Wall>
+            if (formation.HasFlag(WallFormation.FourCrosses))
+            {
+                var newWalls = new List<Wall>
                     {
                         #region Cross 1
 
@@ -113,37 +113,37 @@ namespace SnakeBasic.Helpers
                         #endregion
                     };
 
-				walls.AddRange(newWalls);
+                walls.AddRange(newWalls);
 
-			}
+            }
 
-			#endregion
+            #endregion
 
-			#endregion
+            #endregion
 
-			#region Draw Walls
+            #region Draw Walls
 
-			foreach (Wall wall in walls)
-			{
-				DrawHelper.Draw(wall.Coordinates[0], wall.RenderingChar);
-			}
+            foreach (Wall wall in walls)
+            {
+                DrawHelper.Draw(wall.Coordinates[0], wall.RenderingChar);
+            }
 
-			#endregion
+            #endregion
 
-			return walls;
-		}
+            return walls;
+        }
 
-		/// <summary>
-		/// Returns a new point in the visible console window.
-		/// </summary>
-		public static Point GetRandomPoint()
-		{
-			Random rand = new Random();
-			int x = rand.Next(Console.WindowWidth - 1);
-			int y = rand.Next(Console.WindowHeight - 1);
-			// -1 because the first console line has the index 0, but belongs to the amount of lines, so WindowHeight = 1 after counting first line.
+        /// <summary>
+        /// Returns a new point in the visible console window.
+        /// </summary>
+        public static Point GetRandomPoint()
+        {
+            Random rand = new Random();
+            int x = rand.Next(Console.WindowWidth - 1);
+            int y = rand.Next(Console.WindowHeight - 1);
+            // -1 because the first console line has the index 0, but belongs to the amount of lines, so WindowHeight = 1 after counting first line.
 
-			return new Point(x, y);
-		}
-	}
+            return new Point(x, y);
+        }
+    }
 }

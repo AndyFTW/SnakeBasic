@@ -218,7 +218,7 @@ namespace SnakeBasic
             Console.Write("[Y,N]: ");
 
             string answer;
-			do
+            do
             {
                 answer = Console.ReadLine();
             }
