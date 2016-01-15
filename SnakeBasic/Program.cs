@@ -206,7 +206,6 @@ namespace SnakeBasic
         static void GameOver()
         {
             SnakeTimer.Elapsed -= timer_Elapsed; // Necessary, otherwise the event might fire one more time!
-            SnakeTimer.Stop();
             SnakeTimer.Close();
 
             Console.Clear();
