@@ -218,12 +218,11 @@ namespace SnakeBasic
             Console.Write("[Y,N]: ");
 
             string answer;
-            while (true)
+			do
             {
                 answer = Console.ReadLine();
-
-                if (answer.Length > 0) break;
             }
+            while (answer.Length == 0);
 
             char key = answer.ToUpper()[0];
 
