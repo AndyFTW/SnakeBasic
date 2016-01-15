@@ -16,20 +16,18 @@ namespace SnakeBasic.Entities
 
         void CreateNewCandyPoint()
         {
-            while (true)
+            Point suggestion;
+            do
             {
-                Point suggestion = LevelHelper.GetRandomPoint();
-
-                if (Program.ActiveSnake.Coordinates.Contains(suggestion) || Program.Walls.Any(x => x.Coordinates.Contains(suggestion)))
-                    continue;
-
-                if (Coordinates.Count == 1)
-                    Coordinates[0] = suggestion;
-                else
-                    Coordinates.Add(suggestion);
-                DrawHelper.Draw(Coordinates[0], RenderingChar);
-                return;
+                suggestion = LevelHelper.GetRandomPoint();
             }
+            while (Program.ActiveSnake.Coordinates.Contains(suggestion) || Program.Walls.Any(x => x.Coordinates.Contains(suggestion)));
+
+            if (Coordinates.Count == 1)
+                Coordinates[0] = suggestion;
+            else
+                Coordinates.Add(suggestion);
+            DrawHelper.Draw(Coordinates[0], RenderingChar);
         }
 
         /// <summary>
