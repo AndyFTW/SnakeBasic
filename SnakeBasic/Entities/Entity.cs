@@ -32,7 +32,7 @@ namespace SnakeBasic.Entities
         public virtual void Update()
         {
             Drawn.Clear();
-            foreach (var coord in Coordinates)
+            foreach (Point coord in Coordinates)
             {
                 Drawn.Add(coord, RenderingChar);
             }
@@ -84,9 +84,9 @@ namespace SnakeBasic.Entities
             // XOX
             // XXX
 
-            foreach (var coord in Coordinates)
+            foreach (Point coord in Coordinates)
             {
-                var result = Program.EntityAt(coord.X, coord.Y - 1) // Check field over entity
+                Entity result = Program.EntityAt(coord.X, coord.Y - 1) // Check field over entity
                         ?? Program.EntityAt(coord.X + 1, coord.Y) // Check field on the right side of entity
                         ?? Program.EntityAt(coord.X, coord.Y + 1) // Check field under entity
                         ?? Program.EntityAt(coord.X - 1, coord.Y);// Check field on the left side of entity

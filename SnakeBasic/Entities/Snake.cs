@@ -68,7 +68,7 @@ namespace SnakeBasic.Entities
             // If a candy has been eaten, do not remove last tail, then the snake becomes one unit longer
             if (!ateCandy)
             {
-                var lastBodyPart = Coordinates.First();
+                Point lastBodyPart = Coordinates.First();
 
                 // Clear first body part
                 DrawHelper.Draw(lastBodyPart, ' ');
@@ -78,7 +78,7 @@ namespace SnakeBasic.Entities
 
             Coordinates.Add(HeadPosition); // Convert head to part of body
 
-            var convertedBodyPart = Coordinates.Last();
+            Point convertedBodyPart = Coordinates.Last();
             DrawHelper.Draw(convertedBodyPart, RenderingChar);
 
             #endregion
