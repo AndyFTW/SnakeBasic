@@ -217,7 +217,7 @@ namespace SnakeBasic
             Console.WriteLine("Repeat?");
             Console.Write("[Y,N]: ");
 
-            String answer;
+            string answer;
             while (true)
             {
                 answer = Console.ReadLine();
