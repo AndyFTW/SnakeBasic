@@ -37,7 +37,7 @@ Maximum characters of default console window:
 
 # Keyboard
 
-Only the latest pressed key will be processed.
+Only the last pressed key will be processed.
 
 First, we'll check which arrow key was pressed. After that, the direction change will be validated.
 The change of direction is invalid if the rotation would be 180 degrees (e.g.: left to right).
