@@ -21,7 +21,7 @@ I look up to perfect OOP design. The class structure is a perfect base to achiev
     V
     y
 
-Y points down, so it's easier to draw line by line.
+Y points down, thus it's easier to draw line by line.
 
 Maximum characters of default console window:
 
@@ -37,13 +37,7 @@ Maximum characters of default console window:
 
 # Keyboard
 
-Only the latest pressed event will be processed.
+Only the latest pressed key will be processed.
 
 First, we'll check which arrow key was pressed. After that, the direction change will be validated.
-The direction change is not allowed, if the rotation would be 180 degrees (e.g.: left to right).
-
-# Q&A
-
-Q: Why don't you just subscribe to the KeyDown Event to process the arrow keys?
-
-A: Console applications don't supply a KeyDown Event.
+The change of direction is invalid if the rotation would be 180 degrees (e.g.: left to right).
